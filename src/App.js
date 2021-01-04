@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles.css";
 import Formulario from "./Formulario";
 
 function App() {

@@ -12,6 +12,7 @@ const AutoComplete = ({ data, onSelect }) => {
 
   const searchContainer = useRef(null);
   const searchResultRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     window.addEventListener("mousedown", handleClickOutside);
@@ -57,6 +58,21 @@ const AutoComplete = ({ data, onSelect }) => {
     }
   };
 
+  const Searching = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const Teste = (event) => {
+    if (
+      data.filter(
+        (item) => item.name.toLowerCase() === event.target.value.toLowerCase()
+      ).length === 0
+    ) {
+      inputRef.current.value = "";
+      setSearch("");
+    }
+  };
+
   const showSuggestion = () => setVisiblity(true);
 
   const hideSuggestion = () => setVisiblity(false);
@@ -97,13 +113,15 @@ const AutoComplete = ({ data, onSelect }) => {
       /> */}
 
       <Form.Control
+        ref={inputRef}
         required
+        onBlur={(e) => Teste(e)}
         type="text"
         placeholder="País"
         autoComplete="off"
         value={search}
         onClick={showSuggestion}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={Searching}
         onKeyDown={(e) => keyboardNavigation(e)}
       />
 
